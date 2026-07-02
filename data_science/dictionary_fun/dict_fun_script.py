@@ -9,7 +9,6 @@ for word in open("words.txt", mode = "r"):
 #turn any word into a list of alphabetized strings
 def signature(word):
     return ''.join(sorted(word))
-#print(signature("kayak"))
 
 #create a list of signatures
 words_by_signature = collections.defaultdict(set)
@@ -24,9 +23,7 @@ def find_anagram(word):
         return anagrams_by_signature[signature(word)]
     except KeyError:
         print("no anagrams for this word! sorry!")
-#print(find_anagram("tac"))
 
-#finds possible palindrome pairs
 palindromes = []
 def list_palindromes(dict):
     for anagram in dict.values():
@@ -43,24 +40,37 @@ def find_palindromes(word):
     else:
         print(f"{word} is not a palindrome")
     
-
+def dict_check(input):
+    for word in word_list:
+        if input == word:
+            print("this is a real word")
+        else:
+            print("this word does not exist in this dictionary")
+            break
 def main():
     
     print("welcome to the dictionary toy!\nPlease enter a word:")
     inp = input()
     print(f"you entered: {inp}. What would you like to learn about this word?")
     while(True):
-        option = int(input("Options:\n1: Find this word's signature\n2: Find any anagrams of this word\n3: Find any palindromes of this word\n4: Show all palindromes\n5: Exit\n"))
+        option = int(input("Options:\n1: Check if input word is in this dictionary\n2: Find this word's signature\n3: Find any anagrams of this word\n4: Find any palindromes of this word\n5: Show all palindromes\n6: Exit\n"))
         match(option):
             case 1:
-                print(signature(inp))
+                dict_check(inp)
+                print("\n")
             case 2:
-                print(find_anagram(inp))
+                print(signature(inp))
+                print("\n")
             case 3:
-                print(find_palindromes(inp))
+                print(find_anagram(inp))
+                print("\n")
             case 4:
-                print(list_palindromes(anagrams_by_signature))
+                print(find_palindromes(inp))
+                print("\n")
             case 5:
+                print(list_palindromes(anagrams_by_signature))
+                print("\n")
+            case 6:
                 break
 
 main()
